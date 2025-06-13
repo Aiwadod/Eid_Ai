@@ -69,7 +69,7 @@ export default async function handler(
 
     // Add logo if the user is a club member
     if (isClubMember) {
-      const logoPath = path.join(process.cwd(), 'public', 'logo.png');
+      const logoPath = path.join(process.cwd(), 'public', 'bg', 'logo.png');
       try {
         await fs.access(logoPath);
         const logoBuffer = await fs.readFile(logoPath);
@@ -89,7 +89,8 @@ export default async function handler(
 
       } catch (logoError) {
         console.error('Logo file not found or error processing logo:', logoError);
-        // Optionally, you can still proceed without the logo or send an error
+        // Continue without the logo
+        console.log('Continuing without logo overlay');
       }
     }
 
