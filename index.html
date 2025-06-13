@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بطاقة تهنئة العيد</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <img src="bg/logo.png" class="logo" alt="Logo" />
+    <div id="step1" class="step">
+      <input type="text" id="username" placeholder="ادخل اسمك الكامل بالعربية" />
+      <button onclick="goToStep2()">التالي</button>
+    </div>
+    <div id="step2" class="step hidden">
+      <button onclick="selectCategory('ai')">مستفيد من نادي الذكاء الاصطناعي</button>
+      <button onclick="selectCategory('others')">غير ذلك</button>
+    </div>
+    <div id="step3" class="step hidden">
+      <div id="gallery" class="gallery"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
