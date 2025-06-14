@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "env": {
+    "FONTCONFIG_PATH": "/etc/fonts",
+    "FONTCONFIG_FILE": "/etc/fonts/fonts.conf"
+  }
+} 
