@@ -54,17 +54,15 @@ export default async function handler(
     // SVG for text overlay
     const svgText = `
       <svg width="${metadata.width}" height="${metadata.height}">
-        <style>
-          .title { 
-            fill: #ffffff; 
-            font-size: 60px; 
-            font-weight: bold; 
-            text-anchor: middle; 
-            font-family: system-ui, -apple-system, sans-serif; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-          }
-        </style>
-        <text x="50%" y="${textY}" class="title" dominant-baseline="middle">${userName}</text>
+        <text 
+          x="50%" 
+          y="${textY}" 
+          text-anchor="middle" 
+          fill="#ffffff" 
+          font-size="60px" 
+          font-weight="bold"
+          style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"
+        >${userName}</text>
       </svg>
     `;
 
