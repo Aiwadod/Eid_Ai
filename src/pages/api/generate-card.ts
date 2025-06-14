@@ -78,7 +78,7 @@ export default async function handler(
         const logo = sharp(logoBuffer).resize({ width: 100 }); // Adjust size as needed
         const logoMetadata = await logo.metadata();
         
-        const logoX = (metadata.width - logoMetadata.width) / 2; // Center horizontally
+        const logoX = Math.round((metadata.width - logoMetadata.width) / 2); // Center horizontally
         const logoY = 20; // Position 20px from the top (adjust as needed)
 
         compositeLayers.push({
