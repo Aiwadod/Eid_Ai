@@ -55,7 +55,14 @@ export default async function handler(
     const svgText = `
       <svg width="${metadata.width}" height="${metadata.height}">
         <style>
-          .title { fill: #ffffff; font-size: 60px; font-weight: bold; text-anchor: middle; font-family: 'Noto Sans Arabic', sans-serif; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+          .title { 
+            fill: #ffffff; 
+            font-size: 60px; 
+            font-weight: bold; 
+            text-anchor: middle; 
+            font-family: Arial, Helvetica, sans-serif; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+          }
         </style>
         <text x="50%" y="${textY}" class="title">${userName}</text>
       </svg>
