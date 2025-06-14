@@ -60,7 +60,7 @@ export default async function handler(
             font-size: 60px; 
             font-weight: bold; 
             text-anchor: middle; 
-            font-family: Arial, Helvetica, sans-serif; 
+            font-family: sans-serif; 
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
           }
         </style>
