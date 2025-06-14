@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "mkdir -p /tmp/fontconfig && cp fonts.conf /tmp/fontconfig/fonts.conf",
     "build": "next build",
     "start": "next start"
   },
