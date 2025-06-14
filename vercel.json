@@ -3,15 +3,17 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/next",
-      "config": {
-        "buildCommand": "chmod +x build.sh && ./build.sh",
-        "installCommand": "echo 'Using custom build script'"
-      }
+      "use": "@vercel/next"
     }
   ],
   "env": {
     "FONTCONFIG_PATH": "/tmp/fontconfig",
     "FONTCONFIG_FILE": "/tmp/fontconfig/fonts.conf"
+  },
+  "build": {
+    "env": {
+      "FONTCONFIG_PATH": "/tmp/fontconfig",
+      "FONTCONFIG_FILE": "/tmp/fontconfig/fonts.conf"
+    }
   }
 } 
