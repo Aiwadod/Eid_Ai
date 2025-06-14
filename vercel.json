@@ -5,14 +5,13 @@
       "src": "package.json",
       "use": "@vercel/next",
       "config": {
-        "buildCommand": "npm run build",
-        "installCommand": "npm install"
+        "buildCommand": "chmod +x build.sh && ./build.sh",
+        "installCommand": "echo 'Using custom build script'"
       }
     }
   ],
   "env": {
-    "FONTCONFIG_PATH": "/usr/share/fontconfig",
-    "FONTCONFIG_FILE": "/usr/share/fontconfig/fonts.conf",
-    "LD_LIBRARY_PATH": "/usr/lib"
+    "FONTCONFIG_PATH": "/tmp/fontconfig",
+    "FONTCONFIG_FILE": "/tmp/fontconfig/fonts.conf"
   }
 } 
