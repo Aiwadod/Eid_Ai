@@ -3,11 +3,16 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/next"
+      "use": "@vercel/next",
+      "config": {
+        "buildCommand": "npm run build",
+        "installCommand": "npm install"
+      }
     }
   ],
   "env": {
-    "FONTCONFIG_PATH": ".",
-    "FONTCONFIG_FILE": "fonts.conf"
+    "FONTCONFIG_PATH": "/usr/share/fontconfig",
+    "FONTCONFIG_FILE": "/usr/share/fontconfig/fonts.conf",
+    "LD_LIBRARY_PATH": "/usr/lib"
   }
 } 
