@@ -60,11 +60,11 @@ export default async function handler(
             font-size: 60px; 
             font-weight: bold; 
             text-anchor: middle; 
-            font-family: sans-serif; 
+            font-family: system-ui, -apple-system, sans-serif; 
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
           }
         </style>
-        <text x="50%" y="${textY}" class="title">${userName}</text>
+        <text x="50%" y="${textY}" class="title" dominant-baseline="middle">${userName}</text>
       </svg>
     `;
 
