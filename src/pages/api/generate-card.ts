@@ -57,30 +57,44 @@ export default async function handler(
       return res.status(404).json({ message: 'Selected background image not found.' });
     }
 
-    let image;
     try {
-      image = sharp(imagePath);
+      // Load and process the base image
+      const image = sharp(imagePath);
       const metadata = await image.metadata();
       console.log('Image metadata:', metadata);
+
+      if (!metadata.width || !metadata.height) {
+        throw new Error('Invalid image metadata: missing width or height');
+      }
 
       // Calculate text position
       const textYPercentage = 15;
       const textY = Math.round((metadata.height * textYPercentage) / 100);
 
-      // Create a simple text overlay using sharp's built-in text
-      const textOverlay = {
-        text: {
-          text: userName,
-          font: 'sans',
-          fontSize: 60,
-          rgba: true,
-          align: 'center',
-          top: textY,
-          left: Math.round(metadata.width / 2)
-        }
-      };
+      // Create SVG for text overlay
+      const svgText = `
+        <svg width="${metadata.width}" height="${metadata.height}">
+          <style>
+            .text { 
+              fill: white; 
+              font-size: 60px; 
+              font-weight: bold; 
+              text-anchor: middle; 
+            }
+          </style>
+          <text x="50%" y="${textY}" class="text">${userName}</text>
+        </svg>
+      `;
 
-      const compositeLayers: any[] = [textOverlay];
+      const svgBuffer = Buffer.from(svgText);
+
+      // Prepare composite layers
+      const compositeLayers = [
+        {
+          input: svgBuffer,
+          gravity: 'northwest'
+        }
+      ];
 
       // Add logo if the user is a club member
       if (isClubMember) {
@@ -90,17 +104,21 @@ export default async function handler(
           const logoBuffer = await fs.readFile(logoPath);
           console.log('Logo file found and read successfully');
           
-          // Resize logo if needed and calculate position
+          // Process logo
           const logo = sharp(logoBuffer).resize({ width: 100 });
           const logoMetadata = await logo.metadata();
           
+          if (!logoMetadata.width) {
+            throw new Error('Invalid logo metadata: missing width');
+          }
+
           const logoX = Math.round((metadata.width - logoMetadata.width) / 2);
           const logoY = 20;
 
           compositeLayers.push({
             input: await logo.toBuffer(),
             top: logoY,
-            left: logoX,
+            left: logoX
           });
           console.log('Logo added to composite layers');
 
@@ -124,7 +142,8 @@ export default async function handler(
       console.error('Error processing image:', error);
       return res.status(500).json({ 
         message: 'Error processing image',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        details: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
       });
     }
 
@@ -132,7 +151,8 @@ export default async function handler(
     console.error('Error generating card:', error);
     res.status(500).json({ 
       message: 'Error generating card',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      details: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined
     });
   }
 } 
