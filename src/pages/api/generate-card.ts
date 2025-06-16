@@ -18,90 +18,121 @@ export default async function handler(
   }
 
   try {
+    console.log('Starting card generation for:', { userName, isClubMember });
+
     const imageDir = isClubMember ? 'ai' : 'others';
     const directoryPath = path.join(process.cwd(), 'public', imageDir);
+    console.log('Looking for images in:', directoryPath);
 
     // Get list of image files in the directory
-    const files = await fs.readdir(directoryPath);
+    let files;
+    try {
+      files = await fs.readdir(directoryPath);
+      console.log('Found files:', files);
+    } catch (error) {
+      console.error('Error reading directory:', error);
+      return res.status(500).json({ message: 'Error reading image directory' });
+    }
+
     const imageFiles = files.filter(file => {
       const lowerCaseFile = file.toLowerCase();
       return lowerCaseFile.endsWith('.jpg') || lowerCaseFile.endsWith('.jpeg') || lowerCaseFile.endsWith('.png');
     });
 
     if (imageFiles.length === 0) {
+      console.error('No image files found in directory:', imageDir);
       return res.status(404).json({ message: `No image files found in ${imageDir} directory.` });
     }
 
     // Select a random image file
     const randomImageName = imageFiles[Math.floor(Math.random() * imageFiles.length)];
     const imagePath = path.join(directoryPath, randomImageName);
+    console.log('Selected image:', imagePath);
 
     // Check if the image file exists
     try {
       await fs.access(imagePath);
     } catch (error) {
-      console.error(`Image file not found: ${imagePath}`, error);
+      console.error('Image file not found:', imagePath, error);
       return res.status(404).json({ message: 'Selected background image not found.' });
     }
 
-    let image = sharp(imagePath);
-    const metadata = await image.metadata();
+    let image;
+    try {
+      image = sharp(imagePath);
+      const metadata = await image.metadata();
+      console.log('Image metadata:', metadata);
 
-    // Calculate text position
-    const textYPercentage = 15;
-    const textY = Math.round((metadata.height * textYPercentage) / 100);
+      // Calculate text position
+      const textYPercentage = 15;
+      const textY = Math.round((metadata.height * textYPercentage) / 100);
 
-    // Create a simple text overlay using sharp's built-in text
-    const textOverlay = {
-      text: {
-        text: userName,
-        font: 'sans',
-        fontSize: 60,
-        rgba: true,
-        align: 'center',
-        top: textY,
-        left: Math.round(metadata.width / 2)
+      // Create a simple text overlay using sharp's built-in text
+      const textOverlay = {
+        text: {
+          text: userName,
+          font: 'sans',
+          fontSize: 60,
+          rgba: true,
+          align: 'center',
+          top: textY,
+          left: Math.round(metadata.width / 2)
+        }
+      };
+
+      const compositeLayers: any[] = [textOverlay];
+
+      // Add logo if the user is a club member
+      if (isClubMember) {
+        const logoPath = path.join(process.cwd(), 'public', 'bg', 'logo.png');
+        try {
+          await fs.access(logoPath);
+          const logoBuffer = await fs.readFile(logoPath);
+          console.log('Logo file found and read successfully');
+          
+          // Resize logo if needed and calculate position
+          const logo = sharp(logoBuffer).resize({ width: 100 });
+          const logoMetadata = await logo.metadata();
+          
+          const logoX = Math.round((metadata.width - logoMetadata.width) / 2);
+          const logoY = 20;
+
+          compositeLayers.push({
+            input: await logo.toBuffer(),
+            top: logoY,
+            left: logoX,
+          });
+          console.log('Logo added to composite layers');
+
+        } catch (logoError) {
+          console.error('Logo processing error:', logoError);
+          console.log('Continuing without logo overlay');
+        }
       }
-    };
 
-    const compositeLayers: any[] = [textOverlay];
+      console.log('Starting final image composition');
+      const finalImageBuffer = await image
+        .composite(compositeLayers)
+        .png()
+        .toBuffer();
+      console.log('Image composition completed successfully');
 
-    // Add logo if the user is a club member
-    if (isClubMember) {
-      const logoPath = path.join(process.cwd(), 'public', 'bg', 'logo.png');
-      try {
-        await fs.access(logoPath);
-        const logoBuffer = await fs.readFile(logoPath);
-        
-        // Resize logo if needed and calculate position
-        const logo = sharp(logoBuffer).resize({ width: 100 });
-        const logoMetadata = await logo.metadata();
-        
-        const logoX = Math.round((metadata.width - logoMetadata.width) / 2);
-        const logoY = 20;
+      res.setHeader('Content-Type', 'image/png');
+      res.status(200).send(finalImageBuffer);
 
-        compositeLayers.push({
-          input: await logo.toBuffer(),
-          top: logoY,
-          left: logoX,
-        });
-
-      } catch (logoError) {
-        console.error('Logo file not found or error processing logo:', logoError);
-        console.log('Continuing without logo overlay');
-      }
+    } catch (error) {
+      console.error('Error processing image:', error);
+      return res.status(500).json({ 
+        message: 'Error processing image',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
     }
-
-    const finalImageBuffer = await image
-      .composite(compositeLayers)
-      .png()
-      .toBuffer();
-
-    res.setHeader('Content-Type', 'image/png');
-    res.status(200).send(finalImageBuffer);
 
   } catch (error) {
     console.error('Error generating card:', error);
-    res.status(500).json({ message: 'Error generating card' });
+    res.status(500).json({ 
+      message: 'Error generating card',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    });
   }
 } 
