@@ -36,7 +36,7 @@ export default async function handler(
     const randomImageName = imageFiles[Math.floor(Math.random() * imageFiles.length)];
     const imagePath = path.join(directoryPath, randomImageName);
 
-    // Check if the image file exists (redundant after readdir but good practice)
+    // Check if the image file exists
     try {
       await fs.access(imagePath);
     } catch (error) {
@@ -47,30 +47,24 @@ export default async function handler(
     let image = sharp(imagePath);
     const metadata = await image.metadata();
 
-    // Calculate text position (closer to the top for header)
-    const textYPercentage = 15; // Position at 15% of the height from the top
-    const textY = (metadata.height * textYPercentage) / 100;
+    // Calculate text position
+    const textYPercentage = 15;
+    const textY = Math.round((metadata.height * textYPercentage) / 100);
 
-    // SVG for text overlay
-    const svgText = `
-      <svg width="${metadata.width}" height="${metadata.height}">
-        <text 
-          x="50%" 
-          y="${textY}" 
-          text-anchor="middle" 
-          fill="#ffffff" 
-          font-size="60px" 
-          font-weight="bold"
-          style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"
-        >${userName}</text>
-      </svg>
-    `;
+    // Create a simple text overlay using sharp's built-in text
+    const textOverlay = {
+      text: {
+        text: userName,
+        font: 'sans',
+        fontSize: 60,
+        rgba: true,
+        align: 'center',
+        top: textY,
+        left: Math.round(metadata.width / 2)
+      }
+    };
 
-    const svgBuffer = Buffer.from(svgText);
-
-    const compositeLayers: any[] = [
-      { input: svgBuffer, gravity: 'northwest', top: 0, left: 0 }
-    ];
+    const compositeLayers: any[] = [textOverlay];
 
     // Add logo if the user is a club member
     if (isClubMember) {
@@ -80,11 +74,11 @@ export default async function handler(
         const logoBuffer = await fs.readFile(logoPath);
         
         // Resize logo if needed and calculate position
-        const logo = sharp(logoBuffer).resize({ width: 100 }); // Adjust size as needed
+        const logo = sharp(logoBuffer).resize({ width: 100 });
         const logoMetadata = await logo.metadata();
         
-        const logoX = Math.round((metadata.width - logoMetadata.width) / 2); // Center horizontally
-        const logoY = 20; // Position 20px from the top (adjust as needed)
+        const logoX = Math.round((metadata.width - logoMetadata.width) / 2);
+        const logoY = 20;
 
         compositeLayers.push({
           input: await logo.toBuffer(),
@@ -94,7 +88,6 @@ export default async function handler(
 
       } catch (logoError) {
         console.error('Logo file not found or error processing logo:', logoError);
-        // Continue without the logo
         console.log('Continuing without logo overlay');
       }
     }

@@ -5,15 +5,5 @@
       "src": "package.json",
       "use": "@vercel/next"
     }
-  ],
-  "env": {
-    "FONTCONFIG_PATH": "/tmp/fontconfig",
-    "FONTCONFIG_FILE": "/tmp/fontconfig/fonts.conf"
-  },
-  "build": {
-    "env": {
-      "FONTCONFIG_PATH": "/tmp/fontconfig",
-      "FONTCONFIG_FILE": "/tmp/fontconfig/fonts.conf"
-    }
-  }
+  ]
 } 
