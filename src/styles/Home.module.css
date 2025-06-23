@@ -2,6 +2,7 @@
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  flex-wrap: wrap;
 }
 
 .background {
@@ -51,6 +52,7 @@
   height: auto;
   z-index: 1;
   color: rgb(255, 255, 255);
+ 
 }
 
 .clubSelection {
@@ -101,17 +103,21 @@
 
 .result {
   position: relative;
-  width: 100%;
+  width: 130%;
   height: 100vh;
   display: flex;
   justify-content: center;
+  margin-left: -298px;
   align-items: center;
+  /* border: solid 2px #4e310f; */
 }
 
 .generatedCard {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 130%;
+  max-height: 87%;
+  /* margin-top:-80px; */
   object-fit: contain;
+  border: solid 2px #0f2c4e;
 }
 
 .nameOverlay {
@@ -120,12 +126,380 @@
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  color: white;
+  /* color: white; */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  
 }
 
 .nameOverlay h2 {
   font-size: 10rem;
   margin: 0;
   font-weight: bold;
-} 
+  
+}
+
+.userName {
+  font-size: 1.8rem;      /* Increase as needed */
+  color: #ffffff;          /* Or any color you want */
+   margin-top: -260px;
+  margin-left:-300px ;
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;
+  /* border: solid 2px #cf1010; */
+}
+
+.aiGallery {
+  text-align: center;
+  margin-top: 100px;
+
+}
+.aiGallery h2 {
+  margin-top: 100px;
+  font-size: 1.6rem;
+  color: #0f2c4e;
+  margin-bottom: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.imageGrid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 5px;
+  justify-items: center;
+  flex-wrap: wrap;
+  /* border: solid 1px red; */
+}
+.aiGallery img{
+  width: 100px;
+height: auto;
+}
+
+
+.aiImage {
+  transition: transform 0.2s, border-color 0.2s;
+}
+.aiImage:hover {
+  transform: scale(1.05);
+  border-color: #0070f3;
+}
+
+.suggestionBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-bottom: 120px;
+  border: solid 2px #faf2f2;
+  /* background: #fff; */
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  margin: 40px auto;
+  max-width: 400px;
+  text-align: center;
+}
+
+.suggestionBox h2 {
+  margin-bottom: 24px;
+  color: #333;
+  font-size: 1.5rem;
+  
+}
+
+.suggestionBox button {
+  margin-top: 30%;
+  margin: 0 12px; /* Increase the value for more gap */
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #0f2c4e;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.suggestionBox button:hover {
+  background: #088080;
+}
+
+.suggestionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 34px; /* Adjust the gap as needed */
+}
+
+.downloadButton {
+  margin-top: 730px;
+  /* margin-right: 70px; */
+  padding: 10px 0px;
+ margin-left: 35px;
+  background: #0f2c4e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.downloadButton:hover {
+  background: #088080;
+}
+ /* .downloadButton {
+   margin-top: 46rem;
+   margin-right: -130px;
+  display: block;
+  float: right;
+  padding: 10px 0px;
+  background: #0f2c4e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.downloadButton:hover {
+  background: #088080;
+} */
+
+@media (max-width: 900px) {
+    .downloadButton {
+  /* margin-top: 730px;
+  margin-right: -100px; */
+  padding: 10px 0px;
+ 
+  background: #0f2c4e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.downloadButton:hover {
+  background: #088080;
+}
+   .downloadButton {
+    margin-top: -415px;
+   margin-right: -160px;
+    order: -1; /* If parent is flex, this puts button first */
+  }
+  .result {
+    width: 100%;
+    margin-left: 0;
+  }
+  .generatedCard {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+  .imageGrid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr); /* 3 columns */
+  gap: 5px;
+  justify-items: center;
+  flex-wrap: wrap;
+  /* border: solid 1px red; */
+}
+.aiGallery img{
+  width: 100px;
+height: auto;
+}
+  .userName {
+  font-size: 1.8rem;      /* Increase as needed */
+  color: #ffffff;          /* Or any color you want */
+   margin-top: -230px;
+  margin-left:-280px ;
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;
+  /* border: solid 2px #cf1010; */
+}
+.result {
+  position: relative;
+  width: 110%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-left: -170px;
+  align-items: center;
+}
+
+.generatedCard {
+  max-width: 110%;
+  max-height: 87%;
+  margin-top: 120px;
+  object-fit: contain;
+  /* border: solid 2px #6d1919; */
+}
+
+}
+
+@media (max-width: 600px) {
+  .downloadButton {
+  /* margin-top: 730px;
+  margin-right: -100px; */
+  padding: 10px 0px;
+ 
+  background: #0f2c4e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.downloadButton:hover {
+  background: #088080;
+}
+   .downloadButton {
+    margin-top: -415px;
+   margin-right: -160px;
+    order: -1; /* If parent is flex, this puts button first */
+  }
+  .aiGallery {
+    margin-top: 40px;
+  }
+  .imageGrid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 8px;
+    justify-items: center;
+  flex-wrap: wrap;
+  }
+  .aiGallery img,
+  .aiImage {
+    width: 90px;
+  }
+  .suggestionBox {
+    max-width: 95vw;
+    padding: 16px 4px;
+  }
+  .suggestionBox h2 {
+    font-size: 1.1rem;
+  }
+  .suggestionBox button {
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+  .suggestionButtons {
+    gap: 12px;
+    flex-direction: column;
+  }
+    .userName {
+  font-size: 1.8rem;      /* Increase as needed */
+  color: #ffffff;          /* Or any color you want */
+   margin-top: -260px;
+  margin-left:-300px ;
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;
+  /* border: solid 2px #cf1010; */
+}
+.result {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-left: -100px;
+  align-items: center;
+}
+
+.generatedCard {
+  max-width: 130%;
+  max-height: 87%;
+  margin-top: 120px;
+  object-fit: contain;
+  /* border: solid 2px #0ca7a7; */
+}
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 420px;
+  height: auto;
+  z-index: 1;
+  color: rgb(255, 255, 255);
+  /* border: solid 2px #0f2c4e; */
+}
+}
+
+@media (max-width: 400px) {
+    .downloadButton {
+  /* margin-top: 730px;
+  margin-right: -100px; */
+  padding: 10px 0px;
+ 
+  background: #0f2c4e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.downloadButton:hover {
+  background: #088080;
+}
+   .downloadButton {
+    margin-top: -415px;
+   margin-right: -160px;
+    order: -1; /* If parent is flex, this puts button first */
+  }
+  .imageGrid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  flex-wrap: wrap;
+  }
+  .aiGallery img,
+  .aiImage {
+    width: 100px;
+  }
+  .suggestionBox {
+    padding: 8px 2px;
+  }
+      .userName {
+  font-size: 1.2rem;      /* Increase as needed */
+  color: #ffffff;          /* Or any color you want */
+   margin-top: -120px;
+  margin-left:-220px ;
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;
+  /* border: solid 2px #cf1010; */
+}
+.result {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-left: -70px;
+  align-items: center;
+}
+
+.generatedCard {
+  max-width: 80%;
+  max-height: 87%;
+  margin-top: 100px;
+  object-fit: contain;
+  /* border: solid 2px #350cec; */
+}
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 350px;
+  height: auto;
+  z-index: 1;
+  color: rgb(255, 255, 255);
+  /* border: solid 2px #0f2c4e; */
+}
+
+}

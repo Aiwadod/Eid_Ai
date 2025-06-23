@@ -10,11 +10,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "sharp": "^0.34.2",
-    "@fontsource/noto-sans-arabic": "^5.0.0"
+    "@fontsource/noto-sans-arabic": "^5.0.0",
+    "next": "^15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sharp": "^0.34.2"
   },
   "devDependencies": {
     "@types/node": "22.15.30",
