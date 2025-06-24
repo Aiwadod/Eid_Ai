@@ -89,7 +89,7 @@ export default async function handler(
       const svgBuffer = Buffer.from(svgText);
 
       // Prepare composite layers
-      const compositeLayers = [
+      const compositeLayers: any[] = [
         {
           input: svgBuffer,
           gravity: 'northwest'
@@ -116,7 +116,7 @@ export default async function handler(
           const logoY = 20;
 
           compositeLayers.push({
-            input: await logo.toBuffer(),
+            input: Buffer.from(await logo.toBuffer()),
             top: logoY,
             left: logoX
           });
