@@ -1,48 +1,56 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:url("../../public/bg/bg.png") no-repeat center center fixed;
+  background-size: cover;
 }
 
-.form {
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.card {
+  margin-left: -58rem;
+  background: #0b77be;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
+  padding: 40px 32px 32px 32px;
+  max-width: 350px;
   width: 100%;
-  max-width: 400px;
   text-align: center;
 }
 
+.logo {
+  width: 120px;
+  margin: 0 auto 24px auto;
+  display: block;
+}
+
 .title {
-  color: white;
-  margin-bottom: 0.5rem;
   font-size: 1.5rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fcfcfc;
 }
 
 .subtitle {
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 24px;
 }
 
 .inputWrapper {
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .input {
   width: 100%;
-  padding: 0.75rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
+  padding: 12px 40px 12px 12px;
+  border: 2px solid #e0e7ff;
+  border-radius: 8px;
   font-size: 1rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.9);
+  transition: border 0.2s;
+  outline: none;
+  background: #f9fafb;
 }
 
 .input:focus {
@@ -52,33 +60,33 @@
 }
 
 .input.valid {
-  border-color: #28a745;
-  padding-right: 2.5rem;
+  border-color: #22c55e;
 }
 
 .input.invalid {
-  border-color: #dc3545;
+  border-color: #ef4444;
 }
 
 .checkmark {
   position: absolute;
-  right: 10px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #28a745;
+  color: #22c55e;
   font-size: 1.2rem;
 }
 
 .button {
-  background-color: #007bff;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
   width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #6366f1 0%, #22d3ee 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
 }
 
 .button:hover:not(.buttonDisabled) {
@@ -91,17 +99,41 @@
 }
 
 .buttonDisabled {
-  background-color: #ccc;
+  opacity: 0.5;
   cursor: not-allowed;
-  opacity: 0.7;
 }
-
 .error {
-  color: #dc3545;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-  min-height: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: #e53935; /* Red color, you can use any color you like */
+  font-size: 1rem;
+  margin: 8px 0 0 0;
+  text-align: right;
+}
+/* .extraLogoBg {
+ 
+  width:450px;
+  margin-top: -40rem;
+} */
+@media (max-width: 900px) {
+ .card {
+  margin-left: -30rem;
+  background: #0b77be;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
+  padding: 40px 32px 32px 32px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
 } 
+}
+@media (max-width: 600px) {
+   .card {
+  margin-left: -17rem;
+  background: #0b77be;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
+  padding: 40px 32px 32px 32px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+} 
+}

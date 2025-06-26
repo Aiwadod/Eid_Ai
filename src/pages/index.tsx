@@ -77,6 +77,9 @@ export default function Home() {
     link.href = canvas.toDataURL('image/png');
     link.download = 'eid-card.png';
     link.click();
+
+    // After download, show the "Download Complete" step
+    setStep(5);
   };
 
   return (
@@ -91,7 +94,6 @@ export default function Home() {
       {step === 1 && <NameInput onNameSubmit={handleNameSubmit} />}
 
       {/* Step 2: Show two suggestions */}
-      
       {step === 2 && (
         <div className={styles.suggestionBox}>
           <h2>اختر نوع البطاقة</h2>
@@ -103,7 +105,6 @@ export default function Home() {
       )}
 
       {/* Step 3: If AI was picked, show AI images */}
-      
       {step === 3 && suggestion === 'ai' && (
         <div className={styles.aiGallery}>
           <h2>اختر صورة من الذكاء الاصطناعي</h2>
@@ -165,6 +166,17 @@ export default function Home() {
           <p className={styles.userName}>{userName}</p>
           <button className={styles.downloadButton} onClick={handleDownload}>
             تحميل الصورة مع الاسم
+          </button>
+        </div>
+      )}
+
+      {step === 5 && (
+        <div className={styles.downloadComplete}>
+          <img src="/bg/logo.png" alt="Logo" className={styles.logo} />
+          <h2>تم التحميل بنجاح!</h2>
+          <p>تم حفظ بطاقتك على جهازك 🎉</p>
+          <button className={styles.button} onClick={() => setStep(1)}>
+            إنشاء بطاقة جديدة
           </button>
         </div>
       )}
