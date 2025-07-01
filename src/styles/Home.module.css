@@ -52,7 +52,12 @@
   height: auto;
   z-index: 1;
   color: rgb(255, 255, 255);
- 
+  transition: opacity 0.3s;
+  opacity: 1;
+}
+
+.logo[style*="display: none"] {
+  opacity: 0;
 }
 
 .clubSelection {
@@ -192,13 +197,13 @@ height: auto;
   left: 50%;
   transform: translate(-50%, -50%);
   margin-bottom: 120px;
-  border: solid 2px #faf2f2;
-  /* background: #fff; */
+  border: solid 0.1px #0b7dc0;
+  background: #FFFFFF24;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   padding: 32px 24px;
   margin: 40px auto;
-  max-width: 400px;
+  max-width: 600px;
   text-align: center;
 }
 
@@ -212,24 +217,46 @@ height: auto;
 .suggestionBox button {
   margin-top: 30%;
   margin: 0 12px; /* Increase the value for more gap */
-  padding: 12px 24px;
+  padding: 12px 40px;
   font-size: 1rem;
-  border-radius: 8px;
+  border-radius: 25px;
   border: none;
-  background: #0f2c4e;
+  background: #FFFFFF59;
   color: #fff;
   cursor: pointer;
   transition: background 0.2s;
+  
 }
 
 .suggestionBox button:hover {
-  background: #088080;
+  background: #062b5c;
 }
 
 .suggestionButtons {
-  display: flex;
-  justify-content: center;
-  gap: 34px; /* Adjust the gap as needed */
+   display: flex;
+  flex-direction: column;
+  
+  align-items: center; 
+ 
+  gap: 20px; /* Adjust the gap as needed */
+}
+
+.suggestionButtons button {
+  padding: 14px 0;      /* Equal vertical padding, adjust as needed */
+  width: 360px;         /* Equal width for both buttons */
+  font-size: 1.1rem;
+  border-radius: 25px;
+  border: none;
+  background: #FFFFFF59;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0;            /* Remove any default margin */
+  box-sizing: border-box;
+}
+
+.suggestionButtons button:hover {
+  background: #0f2c4e;
 }
 
 .downloadButton {
@@ -237,7 +264,7 @@ height: auto;
   /* margin-right: 70px; */
   padding: 10px 0px;
  margin-left: 35px;
-  background: #0f2c4e;
+  background: #FFFFFF59;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -246,7 +273,7 @@ height: auto;
   transition: background 0.2s;
 }
 .downloadButton:hover {
-  background: #088080;
+  background: #062b5c;
 }
  /* .downloadButton {
    margin-top: 46rem;
@@ -265,7 +292,32 @@ height: auto;
 .downloadButton:hover {
   background: #088080;
 } */
+/* Optional: Custom style for the buttons in this nav */
+.step2Nav .button {
+  min-width: 150px;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+   background: #FFFFFF59;
+  color: #fff;
+  transition: background 0.2s, opacity 0.2s;
+}
+.step2Nav .button:hover{
+  min-width: 150px;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+ background: #0f2c4e;
+  color: #fff;
+  transition: background 0.2s, opacity 0.2s;
+}
 
+.step2Nav .button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 @media (max-width: 900px) {
   
     .downloadButton {
@@ -273,7 +325,7 @@ height: auto;
   margin-right: -100px; */
   padding: 10px 0px;
  
-  background: #0f2c4e;
+  background: #FFFFFF59;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -282,13 +334,52 @@ height: auto;
   transition: background 0.2s;
 }
 .downloadButton:hover {
-  background: #088080;
+  background: #062b5c;
 }
    .downloadButton {
     margin-top: -415px;
    margin-right: -160px;
     order: -1; /* If parent is flex, this puts button first */
   }
+  .suggestionButtons button {
+  padding: 14px 0;      /* Equal vertical padding, adjust as needed */
+  width: 300px;         /* Equal width for both buttons */
+  font-size: 1.1rem;
+  border-radius: 25px;
+  border: none;
+  background: #FFFFFF59;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0;            /* Remove any default margin */
+  box-sizing: border-box;
+}
+.step2Nav {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.step2Nav .button {
+  min-width: 150px;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+   background: #FFFFFF59;
+  color: #fff;
+  transition: background 0.2s, opacity 0.2s;
+}
+.step2Nav .button:hover{
+  min-width: 100px;
+  font-size: 1.1rem;
+  padding: 12px 14px;
+  border-radius: 25px;
+  border: none;
+ background: #0f2c4e;
+  color: #fff;
+  transition: background 0.2s, opacity 0.2s;
+}
   .result {
     width: 100%;
     margin-left: 0;
@@ -341,12 +432,18 @@ height: auto;
 }
 
 @media (max-width: 600px) {
+  .step2Nav {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
   .downloadButton {
   /* margin-top: 730px;
   margin-right: -100px; */
   padding: 10px 0px;
  
-  background: #0f2c4e;
+  background: #FFFFFF59;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -355,7 +452,7 @@ height: auto;
   transition: background 0.2s;
 }
 .downloadButton:hover {
-  background: #088080;
+  background: #062b5c;
 }
    .downloadButton {
     margin-top: -415px;
@@ -431,6 +528,32 @@ height: auto;
 }
 
 @media (max-width: 400px) {
+  .step2Nav {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.step2Nav .button {
+  min-width: 100px;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+   background: #FFFFFF59;
+  color: #fff;
+  transition: background 0.2s, opacity 0.2s;
+}
+.step2Nav .button:hover{
+  min-width: 100px;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+ background: #0f2c4e;
+  color: #fff;
+  transition: background 0.2s, opacity 0.2s;
+}
     .downloadButton {
   /* margin-top: 730px;
   margin-right: -100px; */
@@ -445,7 +568,7 @@ height: auto;
   transition: background 0.2s;
 }
 .downloadButton:hover {
-  background: #088080;
+  background: #062b5c;
 }
    .downloadButton {
     margin-top: -415px;
@@ -462,7 +585,7 @@ height: auto;
     width: 100px;
   }
   .suggestionBox {
-    padding: 8px 2px;
+    padding: 12px 2px;
   }
       .userName {
   font-size: 1.2rem;      /* Increase as needed */
@@ -511,14 +634,14 @@ height: auto;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50vh;
+  min-height: 40vh;
   text-align: center;
-  background: #0b79a5 ;
+  background:#FFFFFF24;
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
   padding: 40px 32px 32px 32px;
   margin: 250px auto 0 auto;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .downloadComplete .logo {
@@ -537,12 +660,62 @@ height: auto;
 }
 
 .downloadComplete .button {
-  background: linear-gradient(90deg, #6366f1 0%, #22d3ee 100%);
+  background: #FFFFFF59;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
   font-size: 1.1rem;
   font-weight: 600;
-  padding: 12px 24px;
+  padding: 12px 34px;
   cursor: pointer;
 }
+
+.selected {
+  background: #0f2c4e;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.step2Nav {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  
+}
+
+.step3Prev {
+  background:#FFFFFF59;
+  color: #FFFFFFBF;
+  border: 0.5px solid #FFFFFF59;
+  padding: 12px 40px;
+  border-radius: 25px;
+  
+  /* Add more custom styles */
+}
+.step3Prev:hover {
+  background: #062b5c;
+  color: #fff;
+  border: 0.5px solid #fff;
+}
+.step3Next:hover {
+  background: #062b5c;
+  color: #fff;
+  border: 0.5px solid #fff;
+}
+.step3Next {
+  background:#FFFFFF59;
+  color: #FFFFFFBF;
+  border: 0.5px solid #FFFFFF59;
+  padding: 12px 40px;
+  border-radius: 25px;
+  /* Add more custom styles */
+}
+
+.step3Nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Adjust the gap as needed */
+  margin-top: 32px;
+}
+

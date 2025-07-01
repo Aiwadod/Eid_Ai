@@ -9,13 +9,14 @@
 
 .card {
   margin-left: -58rem;
-  background: #0b77be;
+  background: #FFFFFF24;
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
   padding: 40px 32px 32px 32px;
-  max-width: 350px;
+  max-width: 450px;
   width: 100%;
   text-align: center;
+  /* border: solid 2px red; */
 }
 
 .logo {
@@ -41,16 +42,20 @@
   position: relative;
   margin-bottom: 16px;
 }
-
+.input::placeholder {
+  text-align: center;
+  color: #FFFFFFBF;
+  /* Optional: adjust color, font, etc. */
+}
 .input {
   width: 100%;
   padding: 12px 40px 12px 12px;
-  border: 2px solid #e0e7ff;
-  border-radius: 8px;
+  border: 2px solid #FFFFFF59;
+  border-radius: 25px;
   font-size: 1rem;
   transition: border 0.2s;
   outline: none;
-  background: #f9fafb;
+  background: #FFFFFF59;
 }
 
 .input:focus {
@@ -79,10 +84,11 @@
 .button {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(90deg, #6366f1 0%, #22d3ee 100%);
+  background: #FFFFFF59;
+  
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 25px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
@@ -135,5 +141,18 @@
   max-width: 300px;
   width: 100%;
   text-align: center;
+} 
+}
+@media (max-width: 400px) {
+   .card {
+  margin-left: -22rem;
+  background: #0b77be;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
+  padding: 40px 32px 32px 32px;
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+  /* border: solid 1px #9b1919; */
 } 
 }

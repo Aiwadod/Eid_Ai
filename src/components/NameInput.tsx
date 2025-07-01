@@ -43,7 +43,7 @@ const NameInput: React.FC<NameInputProps> = ({ onNameSubmit }) => {
     <div className={styles.container}>
       <HeaderLogo />
       <div className={styles.card}>
-        <h2 className={styles.title}>أدخل اسمك الكامل</h2>
+        <h2 className={styles.title}>أدخل الاسم الثنائي</h2>
         <p className={styles.subtitle}>Enter your full name</p>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputWrapper}>
@@ -52,7 +52,7 @@ const NameInput: React.FC<NameInputProps> = ({ onNameSubmit }) => {
               value={name}
               onChange={handleChange}
               className={`${styles.input} ${isValid ? styles.valid : ''} ${error ? styles.invalid : ''}`}
-              placeholder="الاسم الكامل / Full Name"
+              placeholder=" اسمك يهمنا! / Full Name "
               dir="auto"
               autoFocus
             />
@@ -64,7 +64,7 @@ const NameInput: React.FC<NameInputProps> = ({ onNameSubmit }) => {
             className={`${styles.button} ${!isValid ? styles.buttonDisabled : ''}`}
             disabled={!isValid}
           >
-            متابعة / Continue
+             التالي/ Continue
           </button>
         </form>
       </div>

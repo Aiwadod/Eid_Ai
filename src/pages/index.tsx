@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import NameInput from '../components/NameInput';
 import styles from '../styles/Home.module.css';
 
@@ -26,7 +26,29 @@ export default function Home() {
   const [userName, setUserName] = useState('');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [suggestion, setSuggestion] = useState<'ai' | 'other' | null>(null);
+  const [showLogo, setShowLogo] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    if (step !== 3) {
+      setShowLogo(true);
+      return;
+    }
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current) {
+        // Scrolling down
+        setShowLogo(false); // reversed: hide logo when scrolling down
+      } else {
+        // Scrolling up
+        setShowLogo(true); // reversed: show logo when scrolling up
+      }
+      lastScrollY.current = currentScrollY;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [step]);
 
   const handleNameSubmit = (name: string) => {
     setUserName(name);
@@ -35,17 +57,17 @@ export default function Home() {
 
   const handleSuggestion = (type: 'ai' | 'other') => {
     setSuggestion(type);
-    setStep(3);
+    // Remove setStep(3) from here
   };
 
   const handleImageSelect = (img: string) => {
     setSelectedImage(img);
-    setStep(4);
+    // setStep(4); // REMOVE THIS LINE
   };
 
   const handleOtherImageSelect = (img: string) => {
     setSelectedImage(img);
-    setStep(4);
+    // Remove setStep(4); so it matches handleImageSelect
   };
 
   // Download handler
@@ -86,7 +108,7 @@ export default function Home() {
     <div className={styles.container}>
       <div className={styles.background}>
         <img src="/bg/bg.png" alt="Background" className={styles.bgImage} />
-        {(step === 1 || step === 2 || step === 3) && (
+        {(step === 1 || step === 2 || (step === 3 && showLogo)) && (
           <img src="/bg/logo.png" alt="Logo" className={styles.logo} />
         )}
       </div>
@@ -96,10 +118,45 @@ export default function Home() {
       {/* Step 2: Show two suggestions */}
       {step === 2 && (
         <div className={styles.suggestionBox}>
-          <h2>اختر نوع البطاقة</h2>
+          <h2>هل انت من مستفيدين / اعضاء</h2>
           <div className={styles.suggestionButtons}>
-            <button onClick={() => handleSuggestion('ai')}>بطاقة من الذكاء الاصطناعي</button>
-            <button onClick={() => handleSuggestion('other')}>بطاقة أخرى</button>
+            <button
+              className={suggestion === 'ai' ? styles.selected : ''}
+              onClick={() => handleSuggestion('ai')}
+              type="button"
+            >
+              نادي الذكاء الاصطناعي
+            </button>
+            <button
+              className={suggestion === 'other' ? styles.selected : ''}
+              onClick={() => handleSuggestion('other')}
+              type="button"
+            >
+              غير ذالك
+            </button>
+          </div>
+          <div className={styles.step2Nav}>
+            <button
+              onClick={() => setStep(1)}
+              className={styles.button}
+              type="button"
+            >
+              السابق
+            </button>
+            <button
+              onClick={() => {
+                if (suggestion) setStep(3);
+              }}
+              className={styles.button}
+              type="button"
+              disabled={!suggestion}
+              style={{
+                opacity: suggestion ? 1 : 0.5,
+                cursor: suggestion ? 'pointer' : 'not-allowed'
+              }}
+            >
+              التالي
+            </button>
           </div>
         </div>
       )}
@@ -126,6 +183,27 @@ export default function Home() {
               />
             ))}
           </div>
+          <div className={styles.step3Nav}>
+            <button
+              className={`${styles.button} ${styles.step3Prev}`}
+              type="button"
+              onClick={() => setStep(2)}
+            >
+              السابق
+            </button>
+            <button
+              className={`${styles.button} ${styles.step3Next}`}
+              type="button"
+              onClick={() => setStep(4)}
+              disabled={!selectedImage}
+              style={{
+                opacity: selectedImage ? 1 : 0.5,
+                cursor: selectedImage ? 'pointer' : 'not-allowed'
+              }}
+            >
+              التالي
+            </button>
+          </div>
         </div>
       )}
 
@@ -151,6 +229,27 @@ export default function Home() {
               />
             ))}
           </div>
+          <div className={styles.step3Nav}>
+            <button
+              className={`${styles.button} ${styles.step3Prev}`}
+              type="button"
+              onClick={() => setStep(2)}
+            >
+              السابق
+            </button>
+            <button
+              className={`${styles.button} ${styles.step3Next}`}
+              type="button"
+              onClick={() => setStep(4)}
+              disabled={!selectedImage}
+              style={{
+                opacity: selectedImage ? 1 : 0.5,
+                cursor: selectedImage ? 'pointer' : 'not-allowed'
+              }}
+            >
+              التالي
+            </button>
+          </div>
         </div>
       )}
 
@@ -170,11 +269,12 @@ export default function Home() {
         </div>
       )}
 
+      {/* Step 5: Download complete */}
       {step === 5 && (
         <div className={styles.downloadComplete}>
           <img src="/bg/logo.png" alt="Logo" className={styles.logo} />
-          <h2>تم التحميل بنجاح!</h2>
-          <p>تم حفظ بطاقتك على جهازك 🎉</p>
+          <h2>🤍 كل عام وانت/ي الخير </h2>
+          <p>شكرًا جزيلًا لدعمكم لنا<br />🤖 مع تحيات: فريق نادي الذكاء الاصطناعي </p>
           <button className={styles.button} onClick={() => setStep(1)}>
             إنشاء بطاقة جديدة
           </button>
