@@ -112,9 +112,9 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  margin-left: -298px;
+  margin-left: -300px;
   align-items: center;
-  /* border: solid 2px #4e310f; */
+  /* border: solid 8px #7c0c08; */
 }
 
 .generatedCard {
@@ -146,8 +146,8 @@
 .userName {
   font-size: 1.8rem;      /* Increase as needed */
   color: #ffffff;          /* Or any color you want */
-   margin-top: -260px;
-  margin-left:-300px ;
+   margin-top: -350px;
+  margin-left:-420px ;
   font-weight: bold;
   text-align: center;
   font-style: italic;
@@ -260,10 +260,10 @@ height: auto;
 }
 
 .downloadButton {
-  margin-top: 730px;
+  margin-top: 920px;
   /* margin-right: 70px; */
   padding: 10px 0px;
- margin-left: 35px;
+ margin-left: 8px;
   background: #FFFFFF59;
   color: #fff;
   border: none;

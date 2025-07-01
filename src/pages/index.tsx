@@ -85,14 +85,16 @@ export default function Home() {
     // Draw the image
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-    // Draw the text (customize position, font, color as needed)
-    ctx.font = `${Math.floor(canvas.height / 12)}px Tahoma, Arial, sans-serif`;
+    // Draw the text (centered, smaller font)
+    const fontSize = Math.floor(canvas.height / 25); // smaller font size
+    ctx.font = `${fontSize}px Tahoma, Arial, sans-serif`;
     ctx.fillStyle = '#fff';
     ctx.textAlign = 'center';
-    ctx.textBaseline = 'bottom';
+    ctx.textBaseline = 'middle';
     ctx.shadowColor = 'rgba(0,0,0,0.7)';
     ctx.shadowBlur = 8;
-    ctx.fillText(userName, canvas.width / 2, canvas.height - 40);
+    // Example: Move text to 1/6th from the top
+    ctx.fillText(userName, canvas.width / 2, canvas.height / 3);
 
     // Download the canvas as an image
     const link = document.createElement('a');
