@@ -5,15 +5,17 @@
   justify-content: center;
   background:url("../../public/bg/bg.png") no-repeat center center fixed;
   background-size: cover;
+  
 }
 
 .card {
-  margin-left: -70rem;
+  margin-left: -80rem;
   background: #FFFFFF24;
+  height:40vh;
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
-  padding: 40px 32px 32px 32px;
-  max-width: 450px;
+  padding: 50px 32px 32px 32px;
+  max-width: 650px;
   width: 100%;
   text-align: center;
   /* border: solid 2px red; */
@@ -26,21 +28,21 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 8px;
   color: #fcfcfc;
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #ffffff;
   margin-bottom: 24px;
 }
 
 .inputWrapper {
   position: relative;
-  margin-bottom: 16px;
+  margin-bottom: 2rem; /* Increase this value for more space */
 }
 .input::placeholder {
   text-align: center;
@@ -49,10 +51,10 @@
 }
 .input {
   width: 100%;
-  padding: 12px 40px 12px 12px;
+  padding: 12px 40px 22px 12px;
   border: 2px solid #FFFFFF59;
   border-radius: 25px;
-  font-size: 1rem;
+  font-size: 1.3rem;
   transition: border 0.2s;
   outline: none;
   background: #FFFFFF59;
@@ -83,13 +85,13 @@
 
 .button {
   width: 100%;
-  padding: 12px;
+  padding: 20px;
   background: #FFFFFF59;
   
   color: #fff;
   border: none;
   border-radius: 25px;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, opacity 0.2s;
@@ -113,6 +115,7 @@
   font-size: 1rem;
   margin: 8px 0 0 0;
   text-align: right;
+  margin-bottom: 1.5rem; /* Adjust as needed */
 }
 /* .extraLogoBg {
  
@@ -121,6 +124,7 @@
 } */
 @media (max-width: 900px) {
  .card {
+  height:45vh;
   margin-left: -30rem;
   background: #0b77be;
   border-radius: 24px;
@@ -133,7 +137,8 @@
 }
 @media (max-width: 600px) {
    .card {
-  margin-left: -17rem;
+  height:45vh;
+  margin-left: -22rem;
   background: #0b77be;
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
@@ -145,7 +150,7 @@
 }
 @media (max-width: 400px) {
    .card {
-  margin-left: -22rem;
+  margin-left: -13rem;
   background: #0b77be;
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(60, 60, 120, 0.12);
